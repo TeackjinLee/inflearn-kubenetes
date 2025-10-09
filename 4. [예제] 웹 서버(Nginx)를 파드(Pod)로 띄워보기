@@ -1,0 +1,66 @@
+# [예제] 웹 서버(Nginx)를 파드(Pod)로 띄워보기
+
+### ✅ 웹 서버(Nginx)를 파드(Pod)로 띄워보기
+
+<aside>
+👨🏻‍🏫
+
+파드(Pod)를 생성할 때 **CLI를 활용하는 방법**이 있고, **yaml 파일을 활용하는 방법**이 있다. 실제 현업에서는 yaml 파일을 활용하는 경우가 많다. 따라서 yaml 파일을 활용해서 파드(Pod)를 생성해볼 것이다. 
+
+</aside>
+
+1. **yaml 파일 생성하기**
+    
+    **nginx-pod.yaml**
+    
+    ```yaml
+    apiVersion: v1 # Pod를 생성할 때는 v1이라고 기재한다. (공식 문서)
+    kind: Pod # Pod를 생성한다고 명시
+    metadata:
+      name: nginx-pod # Pod에 이름 붙이는 기능
+    spec:
+      containers:
+        - name: nginx-container # 생성할 컨테이너의 이름
+          image: nginx # 컨테이너를 생성할 때 사용할 Docker 이미지
+          ports:
+            - containerPort: 80 # 해당 컨테이너가 어떤 포트를 사용하는 지 명시적으로 표현
+    ```
+    
+    - **주의)** YAML 문법상 들여쓰기를 할 때 **Tab**을 사용하면 안 되고 반드시 **띄어쓰기**를 활용해야 한다.
+    - `spec.containers.ports.containerPort` : 실제 작동에는 영향을 미치지 않는다. 단순히 컨테이너가 어떤 포트를 사용하는 지 명시적으로 나타내기 위한 문서화용이다. (Dockerfile의 `EXPOSE`와 비슷한 역할이다.)
+    
+2. **yaml 파일을 기반으로 파드(Pod) 생성하기**
+    
+    ```yaml
+    $ kubectl apply -f nginx-pod.yaml # yaml 파일에 적혀져있는 리소스(파드)를 생성
+    ```
+    
+
+1. **파드(Pod)가 잘 생성됐는 지 확인**
+    
+    ```yaml
+    $ kubectl get pods # 파드(Pod) 조회
+    ```
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e35a8144-c5ff-40f0-b123-384a331e35bb/1d34f9e7-9989-45b0-bc3a-f0b940eff649/image.png)
+    
+    - `NAME` : Pod의 이름
+    - `READY` : (파드 내 준비 완료된 컨테이너 수)/(파드 내 총 컨테이너 수)
+    - `STATUS` : 파드의 상태 (`Running` : 정상적으로 실행 중)
+    - `RESTARTS` : 해당 파드의 컨테이너가 재시작된 횟수
+    - `AGE` : 파드가 생성되어 실행된 시간
+
+1. **Nginx에 정상적으로 접속이 되는 지 확인하기**
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e35a8144-c5ff-40f0-b123-384a331e35bb/00641680-6d25-40ec-8538-c7f8170b5586/image.png)
+    
+    > **분명 파드(Pod)로 Nginx를 띄웠는 데 접속이 안 된다. 왜 그럴까?**
+    > 
+
+<aside>
+⭐
+
+쿠버네티스에서는 **위에서 작성한 yaml 파일**을 보고 **매니페스트 파일(Manifest File)**이라고 부른다. 이 **매니페스트 파일**은 **쿠버네티스에서 다양한 리소스(파드, 서비스, 볼륨 등)를 생성하고 관리하기 위해 사용하는 파일**이라고 기억하자. 이 용어는 자주 사용되니 반드시 기억해두자. 
+(Docker로 치면 Dockerfile과 같은 역할을 하는 파일이다.)
+
+</aside>
