@@ -1,0 +1,46 @@
+# 2.로컬에서의 쿠버네티스 설치 (Docker Desktop)
+
+### ✅ 로컬에서의 쿠버네티스 설치
+
+여러 책이나 강의를 살펴보면 쿠버네티스를 설치하는 과정이 굉장히 복잡하며 어렵다. 설치하는 과정만 따라가는데도 포기하고 싶은 마음이 여러 번 드는 게 쿠버네티스이다. 하지만 현업으로 가보면 막상 쿠버네티스를 직접 설치할 일은 극히 드물다. **Docker Desktop**이라는 걸 활용하면 아주 쉽게 쿠버네티스를 설치해서 사용할 수 있다.
+
+### ✅ Docker Desktop을 활용한 쿠버네티스 설치 방법
+
+1. **Docker Desktop 설치 / Docker Desktop에서 Kubernetes 활성화**
+    
+    **[Mac]**
+    
+    [[K8S] MacOS M2 환경 쿠버네티스 설치 (Docker Desktop)](https://soojae.tistory.com/87)
+    
+    **[Windows]**
+    
+    [[Kubernetes] Window에서 Kubernetes 사용하기 (Docker Desktop으로 MiniKube 설치하기)](https://hong-yp-ml-records.tistory.com/127)
+    
+2. **kubectl 설치**
+    
+    <aside>
+    💡
+    
+    **kubectl(Kubernetes Control의 줄임말)이란?** 
+    
+    쿠버네티스에 명령어를 입력할 수 있게 해주는 CLI 툴이다.
+    
+    </aside>
+    
+    **[Mac]**
+    
+    [macOS에 kubectl 설치 및 설정](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-macos/)
+    
+    **[Windows]**
+    
+    [윈도우에 kubectl 설치 및 설정](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/)
+    
+3. **잘 작동하는 지 확인**
+    
+    아래 명령어를 입력했을 때 버전 정보가 정상적으로 출력된다면 쿠버네티스 설치가 완료된 것이다. (버전 정보는 어느 시점에 설치했느냐에 따라 달라질 수 있다.)
+    
+    ```bash
+    $ kubectl version
+    ```
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e35a8144-c5ff-40f0-b123-384a331e35bb/5eae642d-2147-4e25-a899-be65416db23a/image.png)
