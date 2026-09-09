@@ -7,6 +7,22 @@
   - 쿠버네티스에서 가장 작은 단위
   - 일반적으로 하나의 파드가 하나의 컨테이너를 가진다.(예외적으로 여러게인 경우도 있음)
 
+파드 생성 .yaml파일
+```yaml
+  apiVersion: v1    # pod라는거를 기제할때는 v1으로 작성
+kind: Pod
+
+metadata:
+  name: nginx-pod
+
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80 # 문서화 EXPOSE 가독성을 위한 포트
+```
+pod 생성
 ```bash
-  kubectl apply -f new-nginx-pod.yaml
+kubectl apply -f new-nginx-pod.yaml
 ```
