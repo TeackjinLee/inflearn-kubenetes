@@ -43,3 +43,38 @@ pod port 포워드
 # kubectl port-forword pod/[파드명] [로컬에서 포트]/파드에서 포트]
 sudo kubectl port-forward pod/nginx-pod 80:80
 ```
+pod port 삭제
+```bash
+kubectl delete pod nginx-pod
+```
+
+Dockerfile
+```
+FROM eclipse-temurin:17-jdk
+
+COPY build/libs/*SNAPSHOT.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
+매니페스트 파일 (spring-pod.yaml)
+쿠버네티스에게 "이런 Pod를 만들어줘"라고 지시하는 YAML 형식의 설정 파일입니다.
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spring-pod
+spec:
+  containers:
+    - name: spring-container
+      image: spring-server
+      ports:
+        - containerPort: 8080
+```
+
+작성한 매니페스트 파일(spring-pod.yaml)을 적용하여 Pod를 생성
+```bash
+kubectl apply -f spring-pod.yaml
+```
+
