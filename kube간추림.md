@@ -77,4 +77,20 @@ spec:
 ```bash
 kubectl apply -f spring-pod.yaml
 ```
+결과
+```
+NAME         READY   STATUS             RESTARTS   AGE
+spring-pod   0/1     ImagePullBackOff   0          17m
+```
+19. 이미지가 없다고 에러가 뜨는 이유 (이미지 풀 정책)
+
+
+
+
+
+
+
+
+
+
 
