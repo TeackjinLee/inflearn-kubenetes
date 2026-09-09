@@ -83,12 +83,26 @@ NAME         READY   STATUS             RESTARTS   AGE
 spring-pod   0/1     ImagePullBackOff   0          17m
 ```
 19. 이미지가 없다고 에러가 뜨는 이유 (이미지 풀 정책)
+ImagePullPolicy : 이미지 풀 정책 설정
+  Always : 도커허브+ECR같은 원격저장소에서만 이미지 가져옴 
+  IfNotPresent : 로컬에서 먼저 -> 원격저장소
+  Never : 로컬에서만 이미지 가져옴
 
+```
+apiVersion: v1
+kind: Pod
 
+metadata:
+  name: spring-pod
 
-
-
-
+spec:
+  containers:
+    - name: spring-container
+      image: spring-server
+      ports:
+        - containerPort: 8080 # 명시적 문서
+      imagePullPolicy: IfNotPresent
+```
 
 
 
