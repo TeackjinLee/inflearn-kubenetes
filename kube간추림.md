@@ -9,7 +9,7 @@
 
 파드 생성 .yaml파일
 ```yaml
-  apiVersion: v1    # pod라는거를 기제할때는 v1으로 작성
+apiVersion: v1    # pod라는거를 기제할때는 v1으로 작성
 kind: Pod
 
 metadata:
@@ -22,7 +22,24 @@ spec:
       ports:
         - containerPort: 80 # 문서화 EXPOSE 가독성을 위한 포트
 ```
+
 pod 생성
 ```bash
 kubectl apply -f new-nginx-pod.yaml
+```
+
+pod 조회
+```bash
+kubectl get pods
+```
+
+pod 접속
+```bash
+kubectl exec -it nginx-pod -- bash
+```
+
+pod port 포워드
+```bash
+# kubectl port-forword pod/[파드명] [로컬에서 포트]/파드에서 포트]
+sudo kubectl port-forward pod/nginx-pod 80:80
 ```
