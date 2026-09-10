@@ -104,7 +104,55 @@ spec:
       imagePullPolicy: IfNotPresent
 ```
 
+백엔드(Spring Boot) 서버 3개 띄워보기
+- 트래픽 증가 서버 버벅거림을 수평적 확장(서버의 개수를 늘리는 방식)을 통해 해결한다.
 
+spring-pod-1,2,3 이런식으로 증가 그러나 100개인경우는? 이런경우는 depolyment로 관리.
+```
+---
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: spring-pod-1
+
+spec:
+  containers:
+    - name: spring-container
+      image: spring-server
+      ports:
+        - containerPort: 8080 # 명시적 문서
+      imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: spring-pod-2
+
+spec:
+  containers:
+    - name: spring-container
+      image: spring-server
+      ports:
+        - containerPort: 8080 # 명시적 문서
+      imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: spring-pod-3
+
+spec:
+  containers:
+    - name: spring-container
+      image: spring-server
+      ports:
+        - containerPort: 8080 # 명시적 문서
+      imagePullPolicy: IfNotPresent
+---
+```
 
 
 
